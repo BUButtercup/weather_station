@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Assets/style.css">
+    <title>Weather Station</title>
+</head>
+<body>
+    <header>
+        <h1 id="head">Weather Dashboard</h1>
+    </header>
+    <sidebar>
+        <form>
+            <h1 id="side">Search for a City</h1>
+            <input type="search">
+            <datalist></datalist>
+            <button type="submit">Search Cities</button>
+        </form>
+        <section class="container" id="cities">LS cities</section>
+    </sidebar>
+    <main>
+        <section id="today">
+            <h1 id="current"></h1>
+            <ul id="currentCity"></ul>
+        </section>
+        <section id="forcastbox">
+            <div class="fiveday" id="fd1"><ul class="fiveday"></ul></div>
+            <div class="fiveday" id="fd2"><ul class="fiveday"></ul></div>
+            <div class="fiveday" id="fd3"><ul class="fiveday"></ul></div>
+            <div class="fiveday" id="fd4"><ul class="fiveday"></ul></div>
+            <div class="fiveday" id="fd5"><ul class="fiveday"></ul></div>
+        </section>
+    </main>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" referrerpolicy="no-referrer"></script>
+    <script src="./Assets/apis.js"></script>
+    <script src="./Assets/script.js"></script>
+</body>
+</html>
