@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Assets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.structure.min.css" integrity="sha512-oM24YOsgj1yCDHwW895ZtK7zoDQgscnwkCLXcPUNsTRwoW1T1nDIuwkZq/O6oLYjpuz4DfEDr02Pguu68r4/3w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.theme.min.css" integrity="sha512-9h7XRlUeUwcHUf9bNiWSTO9ovOWFELxTlViP801e5BbwNJ5ir9ua6L20tEroWZdm+HFBAWBLx2qH4l4QHHlRyg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
     <title>Weather Station</title>
 </head>
 <body>
@@ -26,64 +29,62 @@
                 </div>
                 <button type="submit" class="searchfrm" id='search'>Search Cities</button>
                 <button id="clearsrch">Clear Search</button>
+
+    <!-- modal -->
+                <div class="dialog" id="dialog-message" style="display: none" title="Please Check Your Entry">
+                    <p> Your search did not return a result...
+                    </p>
+                    <p>
+                      Please make sure your city name is typed correctly.
+                    </p>
+                </div>
+
+                <div class="dialog" id="dialog-message2" style="display: none" title="Please Check Your Entry">
+                    <p> Your search did not return a result...
+                    </p>
+                    <p>
+                      Please make sure your city name is typed correctly.
+                    </p>
+                </div>
+
+
             </form>
             <section class="container">
-                <div id="stored-cities">#stored-cities    
-                    <!-- <li class="cityBtn"></li> -->
-                </div>
+                <div id="stored-cities"><p>Previous searches:</p></div>
                 <button id="clearbtns">Clear List</button>
             </section>
         </sidebar>
         <main>
             <section class="mainbod" id="today">
                 <h2 id="current">&#8601Tell us the location<span id="datebox"></span></h2>
-                <ul id="currentCity">
-                    <!-- <li id=""></li>
-                    <li id=""></li>
-                    <li id=""></li>
-                    <li id=""></li> -->
-                </ul>
+                <ul id="currentCity"></ul>
             </section>
             <section class="mainbod" id="forecast">
                 <h2>5-day Forecast:</h2>
                 <section id="forecastbox">
                     <div class="fday" id="fd1">
                         <span class="futdate" id="futd1"></span>
-                        <ul class="fiveday" id="0">
-                        <!-- <li id=""></li>
-                        <li id=""></li>
-                        <li id=""></li> -->
-                    </ul></div>
+                        <ul class="fiveday" id="0"></ul>
+                    </div>
                     <div class="fday" id="fd2"><span class="futdate" id="futd2"></span>
-                        <ul class="fiveday" id="1">
-                        <!-- <li id=""></li>
-                        <li id=""></li>
-                        <li id=""></li> -->
-                    </ul></div>
+                        <ul class="fiveday" id="1"></ul>
+                    </div>
                     <div class="fday" id="fd3"><span class="futdate" id="futd3"></span>
-                        <ul class="fiveday" id="2">
-                        <!-- <li id=""></li>
-                        <li id=""></li>
-                        <li id=""></li> -->
-                    </ul></div>
+                        <ul class="fiveday" id="2"></ul>
+                    </div>
                     <div class="fday" id="fd4"><span class="futdate" id="futd4"></span>
-                        <ul class="fiveday" id="3">
-                        <!-- <li id=""></li>
-                        <li id=""></li>
-                        <li id=""></li> -->
-                    </ul></div>
+                        <ul class="fiveday" id="3"></ul>
+                    </div>
                     <div class="fday" id="fd5"><span class="futdate" id="futd5"></span>
-                        <ul class="fiveday" id="4">
-                        <!-- <li id=""></li>
-                        <li id=""></li>
-                        <li id=""></li> -->
-                    </ul></div>
+                        <ul class="fiveday" id="4"></ul>
+                    </div>
                 </section>
             </section>
         </main>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./Assets/apis.js"></script>
     <script src="./Assets/script.js"></script>
 </body>

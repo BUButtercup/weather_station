@@ -62,23 +62,15 @@ async function start(){
     if (cityData == undefined) {
         cityData = [];
         return false;
-    } else { createCityBtn()}
+    } else if (cityData.length >= 10){
+        cityData.splice(10);
+        createCityBtn();
+    } else {createCityBtn()}
     console.log(cityData);
-    // let cityBtns = $('.cityBtn');
 }
-// console.log(stateArr);
 
 function storeCity(obj){
-    // for (let i=0; i<cityData.length; i++){
-    //     if (cityData[i].cityLat !== thisCity.cityLat){
-    //         cityData.push(thisCity);
-    //     } else if (cityData[i].cityLong !== thisCity.cityLong){
-    //         cityData.push(thisCity);
-    //     } else {return}
-    // }
-    // console.log('cityData Array: ', cityData);
     cityData.push(obj);
-    
     localStorage.setItem('storedCityData', JSON.stringify(cityData));
     console.log('cityData Array2: ', cityData);
     let newCityBtn = () =>{
@@ -108,6 +100,18 @@ function getCityLoc(){
                 return response.json();
             })
             .then(function(data){
+                if (data.length === 0){
+                    $( "#dialog-message2" ).dialog({
+                          modal: true,
+                          buttons: {
+                            Ok: function() {
+                              $( this ).dialog( "close" );
+                            }
+                          }
+                    });
+                    $('#cityInpt').val('');
+                    return
+                }
                 locData.push(data);
                 console.log(data);
                 console.log(locData);
@@ -187,8 +191,6 @@ async function whichOne(arr){
 }
 
 function getValue(val){
-    console.log(val);
-
     function chooseLoc(url){
         console.log(url);
         fetch(url)
@@ -228,7 +230,7 @@ function getValue(val){
 }
 
 
-function getWeather(lat, long, city){
+function getWeather(lat, long){
     console.log('made it!');
     let weatherUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=imperial&appid=${geoApiKey}`
     console.log('weatherURL', weatherUrl);
@@ -242,10 +244,6 @@ function getWeather(lat, long, city){
 
             //current day box
             currentCity = cityInpt;
-            if (cityInpt === undefined){
-                currentCity = city;
-                console.log('city', city)
-            }///////
             cityH2.textContent = currentCity + currentDay;
             let weatherData = [currentCity, 'Temp: ' + data.current.temp + '\u00B0F', 'Wind: ' + data.current.wind_speed + 'mph', 'Humidity: ' + data.current.humidity + '%', 'UV Index: ' + data.current.uvi];
             console.log('weatherData from getWeather', weatherData);
@@ -278,16 +276,11 @@ function getWeather(lat, long, city){
                     console.log('city not in array, stored')
                 } else {return}
             }
-            // console.log('thisCity: ', thisCity)
-            // console.log('cityData Array: ', cityData);
-            // console.log('cityData length', cityData.length)
-////////////////////////////////////////
             packCity();
-            //5day forcast boxes
 
+            //5day forcast boxes
             let dailyData = data.daily
             let futData = [];
-
             for (let i=0; i<5; i++){
                 let fDayTemp = 'Temp: ' + dailyData[i].temp.day;
                 let fDayWind = 'Wind: ' + dailyData[i].wind_speed;
@@ -299,8 +292,6 @@ function getWeather(lat, long, city){
                 }
                 futData.push(futObj);
             }
-            console.log(futData)
-
             let fdBox1 = document.getElementById('0');
             let fdBox2 = document.getElementById('1');;
             let fdBox3 = document.getElementById('2');;
@@ -324,47 +315,26 @@ function getWeather(lat, long, city){
                 fDayBoxes.innerHTML = '';
                 set5Day(i);
             }
-
-
-            // for (let i=0; i<cityData.length; i++){
-            //    if (thisCity.name !== cityData[i].name){
-            //         cityData.push(thisCity);
-            //         console.log('cityData', cityData);
-            //     } else {return}
-            // }
-            
-
-            // if (storedCities.innerHTML = ''){
-            //     storeCity()
-    //         } else {
-    //             for(let i = 0; i<cityBtn.length; i++){
-    //             console.log(cityBtn[i].innerText)
-    //             if (cityBtn.innerText !== currentCity){
-    //                 storeCity()
-    //             } else { return}
-    //             }
-        //    } 
     });
 }
 
 
 
-// storedCities.addEventListener('click', function(event){
-//     if (event.target.matches('li') === true){
-//         let city = event.target.innerText;
-//         console.log(city);
-//         getWeather(city);
-//     }
-// });
-
-
-submitBtn.addEventListener('click', function(event){
+$(submitBtn).on('click', function(event){
     event.preventDefault();
+    if ($('#cityInpt').val() === ''){
+        $( "#dialog-message" ).dialog({
+              modal: true,
+              buttons: {
+                Ok: function() {
+                  $( this ).dialog( "close" );
+                }
+              }
+        });
+        return
+    }
     $('.fiveday').empty('li');
-
-    // getWeather(document.querySelector('input').value);
     getCityLoc();
-    // storeCity();
 });
 
 $('#clearsrch').on('click', function(event){
