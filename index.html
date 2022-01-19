@@ -11,29 +11,78 @@
     <header>
         <h1 id="head">Weather Dashboard</h1>
     </header>
-    <sidebar>
-        <form>
-            <h1 id="side">Search for a City</h1>
-            <input type="search">
-            <datalist></datalist>
-            <button type="submit">Search Cities</button>
-        </form>
-        <section class="container" id="cities">LS cities</section>
-    </sidebar>
-    <main>
-        <section id="today">
-            <h1 id="current"></h1>
-            <ul id="currentCity"></ul>
-        </section>
-        <section id="forcastbox">
-            <div class="fiveday" id="fd1"><ul class="fiveday"></ul></div>
-            <div class="fiveday" id="fd2"><ul class="fiveday"></ul></div>
-            <div class="fiveday" id="fd3"><ul class="fiveday"></ul></div>
-            <div class="fiveday" id="fd4"><ul class="fiveday"></ul></div>
-            <div class="fiveday" id="fd5"><ul class="fiveday"></ul></div>
-        </section>
-    </main>
-    
+    <div id="mp">
+        <sidebar>
+            <form>
+                <label class="searchfrm" for="cityInpt"><h2 id="side">Search for a City:</h2></label>
+                <div id="inputs">
+                    <input type="text" class="searchfrm" id="cityInpt" placeholder="Type city here...">
+                    <select name="state" id="state">
+                        <option value=''>--State--</option>
+                    </select>
+                </div>
+                <div id="need-id">
+                    <select name="which" id="which" onchange="getValue(this.value)"></select>
+                </div>
+                <button type="submit" class="searchfrm" id='search'>Search Cities</button>
+                <button id="clearsrch">Clear Search</button>
+            </form>
+            <section class="container">
+                <div id="stored-cities">#stored-cities    
+                    <!-- <li class="cityBtn"></li> -->
+                </div>
+                <button id="clearbtns">Clear List</button>
+            </section>
+        </sidebar>
+        <main>
+            <section class="mainbod" id="today">
+                <h2 id="current">&#8601Tell us the location<span id="datebox"></span></h2>
+                <ul id="currentCity">
+                    <!-- <li id=""></li>
+                    <li id=""></li>
+                    <li id=""></li>
+                    <li id=""></li> -->
+                </ul>
+            </section>
+            <section class="mainbod" id="forecast">
+                <h2>5-day Forecast:</h2>
+                <section id="forecastbox">
+                    <div class="fday" id="fd1">
+                        <span class="futdate" id="futd1"></span>
+                        <ul class="fiveday" id="0">
+                        <!-- <li id=""></li>
+                        <li id=""></li>
+                        <li id=""></li> -->
+                    </ul></div>
+                    <div class="fday" id="fd2"><span class="futdate" id="futd2"></span>
+                        <ul class="fiveday" id="1">
+                        <!-- <li id=""></li>
+                        <li id=""></li>
+                        <li id=""></li> -->
+                    </ul></div>
+                    <div class="fday" id="fd3"><span class="futdate" id="futd3"></span>
+                        <ul class="fiveday" id="2">
+                        <!-- <li id=""></li>
+                        <li id=""></li>
+                        <li id=""></li> -->
+                    </ul></div>
+                    <div class="fday" id="fd4"><span class="futdate" id="futd4"></span>
+                        <ul class="fiveday" id="3">
+                        <!-- <li id=""></li>
+                        <li id=""></li>
+                        <li id=""></li> -->
+                    </ul></div>
+                    <div class="fday" id="fd5"><span class="futdate" id="futd5"></span>
+                        <ul class="fiveday" id="4">
+                        <!-- <li id=""></li>
+                        <li id=""></li>
+                        <li id=""></li> -->
+                    </ul></div>
+                </section>
+            </section>
+        </main>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" referrerpolicy="no-referrer"></script>
     <script src="./Assets/apis.js"></script>
     <script src="./Assets/script.js"></script>

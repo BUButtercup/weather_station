@@ -1,0 +1,167 @@
+:root {
+    --light: rgb(0, 204, 255);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+    background-color: whitesmoke;
+    height: 80%;
+}
+
+header {
+    height: 10vh;;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, rgb(71, 118, 248), rgb(26, 26, 97));
+    color: white;
+}
+
+sidebar {
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+    width: 25%;
+    margin-right: 10px;
+    /* border: 1px solid black; */
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    border: 1px solid black;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+    justify-content: space-between;
+    border-bottom: 2px solid slategray;
+    padding: 10px 0;
+    /* border: 1px solid black; */
+}
+
+input {
+    height: 2rem;
+
+}
+
+button {
+    margin: 5px 0;
+    align-self: stretch;
+    background-color: var(--light);
+    border: none;
+    height: 1.5rem;
+    font-size: 1.25rem;
+    /* font-weight: bold; */
+    color: whitesmoke;
+    border-radius: 5px;
+}
+
+#state {
+    overflow-y: auto;
+    max-height: 200px;
+
+}
+
+#head{
+    font-size: 3em;
+}
+
+#inputs {
+    display: flex;
+
+}
+
+.searchFrm {
+    margin: 10px 5px;
+    width:50%;
+}
+
+#stored-cities {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+
+
+#today {
+    padding: 10px;
+}
+
+#currentCity {
+    list-style: none;
+    line-height: 1.25em;
+}
+
+#forecastbox {
+    display: flex;
+    justify-content: space-around;
+    height: 90%;
+    width: 100%;
+    padding-bottom: 10px;
+
+}
+
+#mp {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    height: 90vh;
+    margin: 0 10px;
+    border: 1px solid black;
+}
+
+.mainbod {
+    height: 50%;
+    width: 100%;
+    margin-right: 30px;
+    border: 1px solid black;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+#forecast h2 {
+    margin: 10px;
+}
+
+div.fday {
+    height: 60%;
+    width: 15%;
+    padding: 5px;
+    background-color: rgb(47, 69, 92);
+    color: white;
+    font-weight: bold;
+    border: 1px solid black;
+}
+.fiveday {
+    font-weight: normal;
+    list-style: none;
+
+}
+
+#search, #clearsrch {
+    background-color: grey;
+}
+
+#clearbtns {
+    width: 100%;
+    background-color: grey;
+
+}
