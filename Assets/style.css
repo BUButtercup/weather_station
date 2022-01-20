@@ -69,11 +69,11 @@ button {
     border-radius: 5px;
 }
 
-#state {
-    overflow-y: auto;
-    max-height: 200px;
-
+li {
+    font-size: 1.25rem;
+    line-height: 2rem;
 }
+
 
 #head{
     font-size: 3em;
@@ -89,6 +89,10 @@ button {
     width:50%;
 }
 
+.futdate {
+    font-size: 1.5rem;
+}
+
 #stored-cities {
     display: flex;
     flex-direction: column;
@@ -100,6 +104,25 @@ button {
 
 #today {
     padding: 10px;
+}
+
+#current-title{
+    display: flex;
+    align-items: center;
+}
+
+#date-box {
+    padding: 0 10px;
+}
+
+#current-pic,
+.fut-pic {
+    align-self: center;
+    display: none;
+    border-radius: 50px;
+    height: 50px;
+    width: 50px;
+    background-color:rgb(177, 202, 252);
 }
 
 #currentCity {
@@ -142,7 +165,9 @@ button {
 }
 
 div.fday {
-    height: 60%;
+    display: flex;
+    flex-direction: column;
+    height: 80%;
     width: 15%;
     padding: 5px;
     background-color: rgb(47, 69, 92);
@@ -165,7 +190,3 @@ div.fday {
     background-color: grey;
 
 }
-
-/* .dialog {
-    background-color: lightblue;
-} */

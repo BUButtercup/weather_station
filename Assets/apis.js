@@ -88,6 +88,21 @@ function storeCity(obj){
 
 function getCityLoc(){
     cityInpt = $('#cityInpt').val();
+    let capCityInput = (inpt => {
+        let finalCity = '';
+        let letters = (inpt.toLowerCase()).split('');
+        console.log(letters)
+        let firstLetter = (letters.shift()).toUpperCase();
+        console.log(firstLetter)
+        finalCity = finalCity+=firstLetter
+        console.log(finalCity)
+        letters.forEach(letter=>finalCity+=letter);
+        console.log(finalCity)
+        cityInpt = finalCity
+    });
+    capCityInput(cityInpt);
+    console.log('newcityInpt', cityInpt);
+    
     stateInpt = $('.stateOpt:selected').val();
     let locData = [];
     console.log(stateInpt);
@@ -97,7 +112,19 @@ function getCityLoc(){
 
         fetch(geocodeURL)
             .then(function(response) {
+                if (response.status > 200){
+                    $('#cityInpt').val('')
+                    $( "#dialog-message2" ).dialog({
+                          modal: true,
+                          buttons: {
+                            Ok: function() {
+                              $( this ).dialog( "close" );
+                            }
+                          }
+                    });
+                } else {
                 return response.json();
+                }
             })
             .then(function(data){
                 if (data.length === 0){
@@ -111,12 +138,17 @@ function getCityLoc(){
                     });
                     $('#cityInpt').val('');
                     return
+                } else if (data.length === 1){
+                    console.log(data)
+                    locData.push(data);
+                    getWeather(data[0].lat, data[0].lon)
+                } else {
+                    locData.push(data);
+                    console.log(data);
+                    console.log(locData);
+                    whichOne(locData).then(getValue)
+                    return
                 }
-                locData.push(data);
-                console.log(data);
-                console.log(locData);
-                whichOne(locData).then(getValue)
-                return
             })
     } else {
     geocodeURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityInpt},${stateInpt},US&limit=1&appid=${geoApiKey}`;
@@ -244,7 +276,8 @@ function getWeather(lat, long){
 
             //current day box
             currentCity = cityInpt;
-            cityH2.textContent = currentCity + currentDay;
+            cityH2.textContent = currentCity;
+            $('#date-box').text(currentDay);
             let weatherData = [currentCity, 'Temp: ' + data.current.temp + '\u00B0F', 'Wind: ' + data.current.wind_speed + 'mph', 'Humidity: ' + data.current.humidity + '%', 'UV Index: ' + data.current.uvi];
             console.log('weatherData from getWeather', weatherData);
             todayList.innerHTML = '';
@@ -253,6 +286,23 @@ function getWeather(lat, long){
                 createLi.textContent = weatherData[i];
                 todayList.appendChild(createLi);
             }
+
+            //putting in icons//
+            const currPicBox = document.getElementById('current-pic');
+            currPicBox.setAttribute('style', 'display: flex; justify-content: center; align-items: center')
+ 
+            let picSrc;
+            const currPicCode = data.current.weather[0].icon;
+            const getPic = code => {
+                picSrc = `http://openweathermap.org/img/wn/${code}@2x.png`
+            }
+            getPic(currPicCode);
+            let currPic = document.createElement('img');
+            currPic.setAttribute('src', picSrc);
+            currPic.setAttribute('style', 'height: 45px; width:45px');
+
+            currPicBox.appendChild(currPic);
+
 
             function packCity(){
                 let thisCity = {
@@ -285,20 +335,67 @@ function getWeather(lat, long){
                 let fDayTemp = 'Temp: ' + dailyData[i].temp.day;
                 let fDayWind = 'Wind: ' + dailyData[i].wind_speed;
                 let fDayHum = 'Humidity: ' + dailyData[i].humidity;
+                let fDayPicCode = dailyData[i].weather[0].icon
                 let futObj = {
                     temp: fDayTemp,
                     wind: fDayWind,
-                    humidity: fDayHum
+                    humidity: fDayHum,
+                    imgSrc: `http://openweathermap.org/img/wn/${fDayPicCode}@2x.png`
                 }
                 futData.push(futObj);
             }
+            console.log('futData', futData);
+
             let fdBox1 = document.getElementById('0');
             let fdBox2 = document.getElementById('1');;
             let fdBox3 = document.getElementById('2');;
             let fdBox4 = document.getElementById('3');;
             let fdBox5 = document.getElementById('4');;
             let fDayBoxes = [fdBox1, fdBox2, fdBox3, fdBox4, fdBox5];
-            
+            //5daypics//
+            // let futPicBox = document.getElementsByClassName('fut-pic');
+            // console.log(futPicBox);
+            // const futPicCodes = [];
+            // for (let i=0; i<5; i++){
+            //     futPicCodes.push(data.daily[i].weather[0].icon)
+            // }
+            // console.log('futPicCodes: ', futPicCodes);
+
+            // for (const code of futPicCodes){
+            //     getPic(code);
+            //     let picObj = {
+
+            //     }
+            // }
+            // picSrc;
+
+            // const getPic = code => {
+            //     picSrc = `http://openweathermap.org/img/wn/${code}@2x.png`
+            // }
+
+            // function getFutPics()
+
+            // futPicBox.forEach((element) => {
+            //     let futPic = document.createElement('img');
+            //     futPic.setAttribute('src', src);
+            //     futPic.setAttribute('style', 'height: 45px; width:45px');
+            //     element.setAttribute('style', 'display: flex; justify-content: center; align-items: center')
+            //     element.appendChild(futPic)
+            // })
+
+
+
+            // futPicBox.setAttribute('style', 'display: flex; justify-content: center; align-items: center')
+ 
+            // picSrc;
+            // const currPicCode = data.current.weather[0].icon;
+            // getPic(currPicCode);
+            // let currPic = document.createElement('img');
+            // currPic.setAttribute('src', picSrc);
+            // currPic.setAttribute('style', 'height: 45px; width:45px');
+
+            // currPicBox.appendChild(currPic);
+
             function set5Day(i){
                 let newTLI = document.createElement('li');
                 let newWLI = document.createElement('li');
@@ -306,6 +403,12 @@ function getWeather(lat, long){
                 newTLI.textContent = futData[i].temp;
                 newWLI.textContent = futData[i].wind;
                 newHLI.textContent = futData[i].humidity;
+                let picBox = fDayBoxes[i].previousElementSibling;
+                picBox.setAttribute('style', 'display: flex; justify-content: center; align-items: center')
+                let futPic = document.createElement('img');
+                futPic.setAttribute('src', futData[i].imgSrc);
+                futPic.setAttribute('style', 'height: 45px; width:45px');
+                picBox.appendChild(futPic)
                 fDayBoxes[i].appendChild(newTLI);
                 fDayBoxes[i].appendChild(newWLI);
                 fDayBoxes[i].appendChild(newHLI);
@@ -337,6 +440,13 @@ $(submitBtn).on('click', function(event){
     getCityLoc();
 });
 
+$('#state').on('keyup', function(event) {
+    if (event.keyCode === 13){
+      event.preventDefault();
+      $(submitBtn).click();
+    }
+  })
+
 $('#clearsrch').on('click', function(event){
     event.preventDefault();
     $('#cityInpt').val('');
@@ -357,6 +467,7 @@ $('#stored-cities').on('click', function(event){
     $(cityH2).text('');
     $('#cityInpt').val('');
     $('.fiveday').empty('li');
+    $('#current-pic').empty('img');
     let thisBtn = event.target;
     if (thisBtn.matches("button") === true){
         console.log('matches')

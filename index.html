@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Assets/style.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.structure.min.css" integrity="sha512-oM24YOsgj1yCDHwW895ZtK7zoDQgscnwkCLXcPUNsTRwoW1T1nDIuwkZq/O6oLYjpuz4DfEDr02Pguu68r4/3w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.theme.min.css" integrity="sha512-9h7XRlUeUwcHUf9bNiWSTO9ovOWFELxTlViP801e5BbwNJ5ir9ua6L20tEroWZdm+HFBAWBLx2qH4l4QHHlRyg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/start/theme.min.css" integrity="sha512-+4oA1JhIkAPVt5huAo4UwY32kfQTvrSisIBSHsty6lT7jHx9VLqklS6dcr91z2BnpRgozQKHLUWYe9z9N/6bdw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="Assets/style.css">
     <title>Weather Station</title>
 </head>
 <body>
@@ -50,13 +50,20 @@
 
             </form>
             <section class="container">
-                <div id="stored-cities"><p>Previous searches:</p></div>
-                <button id="clearbtns">Clear List</button>
+                <div id="stored-cities">
+                    <h2>Previous searches:</h2>
+                    <button id="clearbtns">Clear List</button>
+                </div>
+                
             </section>
         </sidebar>
         <main>
             <section class="mainbod" id="today">
-                <h2 id="current">&#8601Tell us the location<span id="datebox"></span></h2>
+                <div id="current-title">
+                    <h2 id="current">&#8601Tell us the location</h2>
+                    <h2 id="datebox"></h2>
+                    <div id="current-pic"></div>
+                </div>
                 <ul id="currentCity"></ul>
             </section>
             <section class="mainbod" id="forecast">
@@ -64,18 +71,27 @@
                 <section id="forecastbox">
                     <div class="fday" id="fd1">
                         <span class="futdate" id="futd1"></span>
+                        <div class="fut-pic"></div>
                         <ul class="fiveday" id="0"></ul>
                     </div>
-                    <div class="fday" id="fd2"><span class="futdate" id="futd2"></span>
+                    <div class="fday" id="fd2">
+                        <span class="futdate" id="futd2"></span>
+                        <div class="fut-pic"></div>
                         <ul class="fiveday" id="1"></ul>
                     </div>
-                    <div class="fday" id="fd3"><span class="futdate" id="futd3"></span>
+                    <div class="fday" id="fd3">
+                        <span class="futdate" id="futd3"></span>
+                        <div class="fut-pic"></div>
                         <ul class="fiveday" id="2"></ul>
                     </div>
-                    <div class="fday" id="fd4"><span class="futdate" id="futd4"></span>
+                    <div class="fday" id="fd4">
+                        <span class="futdate" id="futd4"></span>
+                        <div class="fut-pic"></div>
                         <ul class="fiveday" id="3"></ul>
                     </div>
-                    <div class="fday" id="fd5"><span class="futdate" id="futd5"></span>
+                    <div class="fday" id="fd5">
+                        <span class="futdate" id="futd5"></span>
+                        <div class="fut-pic"></div>
                         <ul class="fiveday" id="4"></ul>
                     </div>
                 </section>
