@@ -101,7 +101,8 @@ li {
 }
 
 #today {
-    padding: 10px;
+    height: 40%;
+    padding: 30px 10px 0 10px;
 }
 
 #current-title{
@@ -109,7 +110,9 @@ li {
     align-items: center;
 }
 
-#date-box {
+#date-box,
+#current {
+    font-size: 2rem;
     padding: 0 10px;
 }
 
@@ -133,7 +136,7 @@ li {
     justify-content: center;
     align-items: center;
     height: 30px; 
-    width: 30px; 
+    width: 50px; 
     color: white
 }
 
@@ -156,7 +159,7 @@ li {
 }
 
 .mainbod {
-    height: 50%;
+    /* height: 50%; */
     width: 100%;
     margin-right: 30px;
     border: 1px solid black;
@@ -165,6 +168,10 @@ li {
 .container {
     display: flex;
     flex-direction: column;
+}
+
+#forecast {
+    height: 60%;
 }
 
 #forecast h2 {
