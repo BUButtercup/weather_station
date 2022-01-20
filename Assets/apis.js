@@ -283,9 +283,11 @@ function getWeather(lat, long){
             todayList.innerHTML = '';
             for (let i=1; i<weatherData.length; i++){
                 let createLi = document.createElement('li');
+                createLi.setAttribute('class', 'list');
                 createLi.textContent = weatherData[i];
                 todayList.appendChild(createLi);
             }
+             
             const currUVI = data.current.uvi
             const uvLI= todayList.lastElementChild;
             uvLI.setAttribute('style', 'display:flex')
@@ -294,6 +296,7 @@ function getWeather(lat, long){
             uvBox.textContent = currUVI
             const uvRec = document.createElement('li');
             uvRec.setAttribute('style', 'margin-left: 3rem; font-style: italic; font-size: 1rem')
+            uvRec.setAttribute('id', 'uv-rec');
             if (currUVI <= 2){
                 uvBox.setAttribute('style', 'background-color: green');
                 uvRec.textContent = 'Low Risk of UV Damage: EPA recs include sunglasses in bright sun; those with sensitive skin cover up and use a sunscreen w/ SPF 30+'
@@ -386,8 +389,11 @@ function getWeather(lat, long){
  
             function set5Day(i){
                 let newTLI = document.createElement('li');
+                newTLI.setAttribute('class', 'list');
                 let newWLI = document.createElement('li');
+                newWLI.setAttribute('class', 'list');
                 let newHLI = document.createElement('li');
+                newHLI.setAttribute('class', 'list');
                 newTLI.textContent = futData[i].temp;
                 newWLI.textContent = futData[i].wind;
                 newHLI.textContent = futData[i].humidity;
