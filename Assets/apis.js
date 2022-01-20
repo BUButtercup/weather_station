@@ -41,17 +41,14 @@ function stateSelector(){
         document.querySelector('#state').appendChild(newOption);
     }
 }
-console.log(stateArr);
 
 function createCityBtn(){
-    console.log('CB', cityData)
     for (let i=0; i<cityData.length; i++){
         let thisCity = cityData[i];
         let name = thisCity.name;
         let cityBtn = document.createElement('button');
         cityBtn.setAttribute('class', 'cityBtn');
         cityBtn.textContent = name;
-        console.log('createBtn', name)
         storedCities.appendChild(cityBtn);
     }
 }
@@ -66,18 +63,15 @@ async function start(){
         cityData.splice(10);
         createCityBtn();
     } else {createCityBtn()}
-    console.log(cityData);
 }
 
 function storeCity(obj){
     cityData.push(obj);
     localStorage.setItem('storedCityData', JSON.stringify(cityData));
-    console.log('cityData Array2: ', cityData);
     let newCityBtn = () =>{
         let createBtn = document.createElement('button');
         createBtn.setAttribute('class', 'cityBtn');
         createBtn.textContent = currentCity;
-        console.log(currentCity)
         storedCities.appendChild(createBtn);
     };
     newCityBtn();
@@ -91,21 +85,15 @@ function getCityLoc(){
     let capCityInput = (inpt => {
         let finalCity = '';
         let letters = (inpt.toLowerCase()).split('');
-        console.log(letters)
         let firstLetter = (letters.shift()).toUpperCase();
-        console.log(firstLetter)
         finalCity = finalCity+=firstLetter
-        console.log(finalCity)
         letters.forEach(letter=>finalCity+=letter);
-        console.log(finalCity)
         cityInpt = finalCity
     });
     capCityInput(cityInpt);
-    console.log('newcityInpt', cityInpt);
     
     stateInpt = $('.stateOpt:selected').val();
     let locData = [];
-    console.log(stateInpt);
     if (stateInpt === undefined){
         geocodeURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityInpt}&limit=5&appid=${geoApiKey}`
         console.log(geocodeURL)
@@ -144,15 +132,12 @@ function getCityLoc(){
                     getWeather(data[0].lat, data[0].lon)
                 } else {
                     locData.push(data);
-                    console.log(data);
-                    console.log(locData);
                     whichOne(locData).then(getValue)
                     return
                 }
             })
     } else {
     geocodeURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityInpt},${stateInpt},US&limit=1&appid=${geoApiKey}`;
-    console.log('exact choice');
     
     fetch(geocodeURL)
         .then(function(response) {
@@ -160,7 +145,6 @@ function getCityLoc(){
         })
         .then(function(data){
             locData.push(data);
-            console.log(data);
             getWeather(data[0].lat, data[0].lon)
             $('#state').find('option:eq(0)').attr('selected', true);
         });
@@ -172,17 +156,13 @@ async function whichOne(arr){
     let locsNUS = [];
     for (let i=0; i<arr[0].length; i++){
         if (arr[0][i].country === 'US'){
-            console.log('in the US')
             locsUS.push(arr[0][i]);
         } else {
-            console.log('International');
             locsNUS.push(arr[0][i])
         }
     }
-    console.log('locsUS: ', locsUS);
-    console.log('locsNUS: ', locsNUS);
-    //creating pop-in choice selector//
 
+    //creating pop-in choice selector//
     whichCity.setAttribute('name', 'which');
     whichCity.setAttribute('id', 'which');
     whichCity.setAttribute('style', 'display: block');
@@ -224,14 +204,11 @@ async function whichOne(arr){
 
 function getValue(val){
     function chooseLoc(url){
-        console.log(url);
         fetch(url)
             .then(function(response) {
                 return response.json();
             })
             .then(function(data){
-                console.log(data);
-                console.log(data[0].lat, data[0].lon);
                 getWeather(data[0].lat, data[0].lon);
             });
     }
@@ -239,31 +216,25 @@ function getValue(val){
     async function chooseState(val){
         stateInpt = val
         geocodeURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityInpt},${stateInpt}&limit=1&appid=${geoApiKey}`;
-        console.log(geocodeURL);
         chooseLoc(geocodeURL);
     } 
 
     async function chooseCountry(val){
         countryInpt = val
         geocodeURL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityInpt},${countryInpt}&limit=1&appid=${geoApiKey}`;
-        console.log(geocodeURL);
         chooseLoc(geocodeURL);
     }
 
     let splitVal = val.split('-');
-    console.log(splitVal);
     if (splitVal[0] == 'US'){
-        console.log('US', splitVal[0]);
         chooseState(val);
     } else {
-        (console.log('Int', val))
         chooseCountry(val)
     }
 }
 
 
 function getWeather(lat, long){
-    console.log('made it!');
     let weatherUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&units=imperial&appid=${geoApiKey}`
     console.log('weatherURL', weatherUrl);
 
@@ -332,11 +303,8 @@ function getWeather(lat, long){
             getPic(currPicCode);
             let currPic = document.createElement('img');
             currPic.setAttribute('src', picSrc);
-            // currPic.setAttribute('style', 'height: 45px; width:45px');
             currPic.setAttribute('id', 'current-img');
-
             currPicBox.appendChild(currPic);
-
 
             function packCity(){
                 let thisCity = {
@@ -345,19 +313,14 @@ function getWeather(lat, long){
                     cityLong: long
                 }
                 if (cityData.length === 0) {
-                    console.log('2cityData length', cityData.length)
                     storeCity(thisCity);
-                    console.log('array empty, stored')
                 }
                 let dataNames = [];
                 for (let i=0; i<cityData.length; i++){
                     dataNames.push(cityData[i].name)
                 }
-                console.log(dataNames);
                 if (dataNames.includes(thisCity.name) !== true){
-                    console.log(thisCity.name);
                     storeCity(thisCity)
-                    console.log('city not in array, stored')
                 } else {return}
             }
             packCity();
@@ -378,7 +341,6 @@ function getWeather(lat, long){
                 }
                 futData.push(futObj);
             }
-            console.log('futData', futData);
 
             let fdBox1 = document.getElementById('0');
             let fdBox2 = document.getElementById('1');;
@@ -408,7 +370,6 @@ function getWeather(lat, long){
                 fDayBoxes[i].appendChild(newHLI);
             }
             for (let i=0; i<fDayBoxes.length; i++){
-                console.log('yes');
                 fDayBoxes.innerHTML = '';
                 set5Day(i);
             }
@@ -459,7 +420,6 @@ $('#clearbtns').on('click', function(event){
 })
 
 $('#stored-cities').on('click', function(event){
-    console.log('yes!')
     $(cityH2).text('');
     $('#cityInpt').val('');
     $('.fiveday').empty('li');
@@ -467,10 +427,8 @@ $('#stored-cities').on('click', function(event){
     $('#current-pic').empty('img');
     let thisBtn = event.target;
     if (thisBtn.matches("button") === true){
-        console.log('matches')
         for (let i=0; i<cityData.length; i++){
             if (cityData[i].name == thisBtn.textContent){
-                console.log(thisBtn.textContent)
                 let lat = cityData[i].cityLat;
                 let long = cityData[i].cityLong;
                 let name = cityData[i].name;

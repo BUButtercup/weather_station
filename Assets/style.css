@@ -27,16 +27,17 @@ sidebar {
     display: flex;
     flex-direction: column;
     align-content: stretch;
+    height: 100%;
     width: 25%;
     margin-right: 10px;
-    /* border: 1px solid black; */
+    border-right: 2px solid slategray;
 }
 
 main {
     display: flex;
     flex-direction: column;
     align-content: center;
-    justify-content: center;
+    justify-content: flex-start;
     height: 100%;
     width: 100%;
 }
@@ -47,7 +48,7 @@ form {
     align-content: stretch;
     justify-content: space-between;
     padding: 10px 0;
-    /* border: 1px solid black; */
+    border-bottom: 2px solid slategray;
 }
 
 input {
@@ -99,8 +100,10 @@ li {
 }
 
 #today {
-    height: 40%;
+    height:auto;
+    min-height: 25%;
     padding: 30px 10px 0 10px;
+    border-bottom: 2px solid slategray;
 }
 
 #current-title{
@@ -112,6 +115,11 @@ li {
 #current {
     font-size: 2rem;
     padding: 0 10px;
+}
+
+#arrow {
+    height: 20px;
+    width: 20px;
 }
 
 #current-pic,
@@ -161,7 +169,6 @@ li {
 }
 
 .mainbod {
-    /* height: 50%; */
     width: 100%;
     margin-right: 30px;
 }
@@ -211,17 +218,43 @@ div.fday {
 
 }
 
-@media screen and (max-width: 770px) {
+.futdate {
+    font-size: 1rem;
+}
+
+@media screen and (max-width: 950px) {
     :root {
         font-size: 14px;
+    }
+
+    sidebar {
+        height: 100%;
+        width: 35%;
+        padding-right: 5px;
+        border-right: 2px solid slategray;
+    }
+
+    form {
+        border-bottom: 2px solid slategray;
     }
 
     btn {
         font-size: 1.25rem;;
     }
 
+    h2 {
+        text-align: center;
+    }
+
     #today {
-        height: 35%;
+        height: auto;
+        padding-bottom: 20px;
+        border-bottom: 2px solid slategray;
+    }
+
+    #arrow {
+        height: 20px;
+        width: 20px;
     }
 
     #forecast {
