@@ -390,11 +390,11 @@ function getWeather(lat, long){
                 newTLI.textContent = futData[i].temp;
                 newWLI.textContent = futData[i].wind;
                 newHLI.textContent = futData[i].humidity;
-                let picBox = fDayBoxes[i].previousElementSibling;
-                picBox.setAttribute('style', 'display: flex; justify-content: center; align-items: center')
                 let futPic = document.createElement('img');
                 futPic.setAttribute('src', futData[i].imgSrc);
                 futPic.setAttribute('style', 'height: 45px; width:45px');
+                let picBox = fDayBoxes[i].previousElementSibling;
+                picBox.setAttribute('style', 'display: flex; justify-content: center; align-items: center')
                 picBox.appendChild(futPic)
                 fDayBoxes[i].appendChild(newTLI);
                 fDayBoxes[i].appendChild(newWLI);
@@ -424,6 +424,8 @@ $(submitBtn).on('click', function(event){
         return
     }
     $('.fiveday').empty('li');
+    $('.fut-pic').empty('img');
+    $('#current-pic').empty('img');
     getCityLoc();
 });
 
