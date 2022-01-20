@@ -186,7 +186,7 @@ async function whichOne(arr){
     whichCity.setAttribute('name', 'which');
     whichCity.setAttribute('id', 'which');
     whichCity.setAttribute('style', 'display: block');
-    // whichCity.setAttribute('onchange', 'getValue(this.id)')
+
     //creating first option for placeholder//
     let opt1 = document.createElement('option');
     opt1.setAttribute('value', '');
@@ -329,7 +329,8 @@ function getWeather(lat, long){
             getPic(currPicCode);
             let currPic = document.createElement('img');
             currPic.setAttribute('src', picSrc);
-            currPic.setAttribute('style', 'height: 45px; width:45px');
+            // currPic.setAttribute('style', 'height: 45px; width:45px');
+            currPic.setAttribute('id', 'current-img');
 
             currPicBox.appendChild(currPic);
 
@@ -392,7 +393,7 @@ function getWeather(lat, long){
                 newHLI.textContent = futData[i].humidity;
                 let futPic = document.createElement('img');
                 futPic.setAttribute('src', futData[i].imgSrc);
-                futPic.setAttribute('style', 'height: 45px; width:45px');
+                futPic.setAttribute('class', 'fut-img');
                 let picBox = fDayBoxes[i].previousElementSibling;
                 picBox.setAttribute('style', 'display: flex; justify-content: center; align-items: center')
                 picBox.appendChild(futPic)

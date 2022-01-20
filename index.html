@@ -17,12 +17,12 @@
     </header>
     <div id="mp">
         <sidebar>
-            <form>
+            <form id="loc-search">
                 <label class="searchfrm" for="cityInpt"><h2 id="side">Search for a City:</h2></label>
                 <div id="inputs">
                     <input type="text" class="searchfrm" id="cityInpt" placeholder="Type city here...">
                     <select name="state" id="state">
-                        <option value=''>--State--</option>
+                        <option value=''>State</option>
                     </select>
                 </div>
                 <div id="need-id">
@@ -50,9 +50,9 @@
 
 
             </form>
-            <section class="container">
+            <section class="container" id="city-hx">
                 <div id="stored-cities">
-                    <h2>Previous searches:</h2>
+                    <h2 id="hx-title">Previous searches:</h2>
                     <button id="clearbtns">Clear List</button>
                 </div>
                 

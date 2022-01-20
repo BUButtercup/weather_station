@@ -131,6 +131,11 @@ li {
     line-height: 1.25em;
 }
 
+#current-img {
+    width: 45px;
+    height: 45px;
+}
+
 #uvBox {
     display: flex;
     justify-content: center;
@@ -175,7 +180,7 @@ li {
 }
 
 #forecast h2 {
-    margin: 10px;
+    margin: 30px 10px;
 }
 
 div.fday {
@@ -195,6 +200,11 @@ div.fday {
 
 }
 
+.fut-img {
+    width: 45px;
+    height: 45px;
+}
+
 #search, #clearsrch {
     background-color: grey;
 }
@@ -203,4 +213,94 @@ div.fday {
     width: 100%;
     background-color: grey;
 
+}
+
+@media screen and (max-width: 770px) {
+    :root {
+        font-size: 14px;
+    }
+
+    btn {
+        font-size: 1.25rem;;
+    }
+
+    #today {
+        height: 35%;
+    }
+
+    #forecast {
+        height: 65%;
+    }
+
+
+    #loc-search {
+        order: 1;
+    }
+
+    #cityInpt {
+        width: 60%;
+        font-size: 0.75rem;
+    }
+    #state  {
+        width: 40%;
+        font-size: 0.75rem;
+    }
+
+    #side, #hx-title {
+        font-size: 1.25rem;;
+        text-align: center;
+    }
+
+    #today {
+        order: 2;
+    }
+
+    #forecast {
+        display: flex;
+        flex-direction: column;
+        order: 3;
+    }
+    #forecastbox {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    #forecast h2 {
+        margin: 10px;
+    }
+
+    .futdate {
+        font-size: 1rem;
+    }
+
+    div.fday {
+        display: flex;
+        justify-content: space-around;
+        width: 50%;
+        height: 18%;
+        flex-direction: row;
+    }
+
+
+
+    .fiveday li {
+        font-size: 1rem;
+    }
+
+    .fut-pic {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+    }
+
+    .fut-img {
+        width: 25px;
+        height: 25px;
+    }
+
+    #city-hx {
+        order: 4;
+    }
 }
