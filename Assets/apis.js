@@ -278,7 +278,7 @@ function getWeather(lat, long){
             currentCity = cityInpt;
             cityH2.textContent = currentCity;
             $('#date-box').text(currentDay);
-            let weatherData = [currentCity, 'Temp: ' + data.current.temp + '\u00B0F', 'Wind: ' + data.current.wind_speed + 'mph', 'Humidity: ' + data.current.humidity + '%', 'UV Index: ' + data.current.uvi];
+            let weatherData = [currentCity, 'Temp: ' + data.current.temp + '\u00B0F', 'Wind: ' + data.current.wind_speed + 'mph', 'Humidity: ' + data.current.humidity + '%', 'UV Index: '];
             console.log('weatherData from getWeather', weatherData);
             todayList.innerHTML = '';
             for (let i=1; i<weatherData.length; i++){
@@ -286,7 +286,37 @@ function getWeather(lat, long){
                 createLi.textContent = weatherData[i];
                 todayList.appendChild(createLi);
             }
-
+            const currUVI = data.current.uvi
+            const uvLI= todayList.lastElementChild;
+            uvLI.setAttribute('style', 'display:flex')
+            const uvBox = document.createElement('div');
+            uvBox.setAttribute('id', 'uvBox')
+            uvBox.textContent = currUVI
+            const uvRec = document.createElement('li');
+            uvRec.setAttribute('style', 'margin-left: 3rem; font-style: italic; font-size: 1rem')
+            if (currUVI <= 2){
+                uvBox.setAttribute('style', 'background-color: green');
+                uvRec.textContent = 'Low Risk of UV Damage: EPA recs include sunglasses in bright sun; those with sensitive skin cover up and use a sunscreen w/ SPF 30+'
+                todayList.append(uvRec);
+            } else if ((currUVI > 2) && (currUVI < 6)){
+                uvBox.setAttribute('style', 'background-color: yellow');
+                uvRec.textContent = 'Moderate Risk of UV Damage: EPA recs include avoiding sun at midday; when outdoors wear protective clothing, wide-brimmed hat, and UV-blocking sunglasses; generously apply SPF 30+ sunscreen every 2 hours, and after swimming or sweating'
+                todayList.append(uvRec);
+            } else if((currUVI > 5) && (currUVI < 8)){
+                uvBox.setAttribute('style', 'background-color: orange');
+                uvRec.textContent = 'High Risk of UV Damage: EPA recs include reduce time in sun between 10am and 4pm; when outdoors seek shade, wear protective clothing, wide-brimmed hat, and UV-blocking sunglasses; generously apply SPF 30+ sunscreen every 2 hours, and after swimming or sweating'
+                todayList.append(uvRec);
+            } else if ((currUVI > 7) && (currUVI < 11)){
+                uvBox.setAttribute('style', 'background-color: red');
+                uvRec.textContent = 'Very High Risk of UV Damage: EPA recs include reduce time in sun between 10am and 4pm; when outdoors seek shade, wear protective clothing, wide-brimmed hat, and UV-blocking sunglasses; generously apply SPF 30+ sunscreen every 2 hours, and after swimming or sweating'
+                todayList.append(uvRec);
+            } else {
+                uvBox.setAttribute('style', 'background-color: purple');
+                uvRec.textContent = 'Extreme Risk of UV Damage: EPA recs include avoiding time in sun between 10am and 4pm; when outdoors seek shade, wear protective clothing, wide-brimmed hat, and UV-blocking sunglasses; generously apply SPF 30+ sunscreen every 2 hours, and after swimming or sweating'
+                todayList.append(uvRec);
+            }
+            uvLI.append(uvBox)
+            
             //putting in icons//
             const currPicBox = document.getElementById('current-pic');
             currPicBox.setAttribute('style', 'display: flex; justify-content: center; align-items: center')
@@ -352,50 +382,7 @@ function getWeather(lat, long){
             let fdBox4 = document.getElementById('3');;
             let fdBox5 = document.getElementById('4');;
             let fDayBoxes = [fdBox1, fdBox2, fdBox3, fdBox4, fdBox5];
-            //5daypics//
-            // let futPicBox = document.getElementsByClassName('fut-pic');
-            // console.log(futPicBox);
-            // const futPicCodes = [];
-            // for (let i=0; i<5; i++){
-            //     futPicCodes.push(data.daily[i].weather[0].icon)
-            // }
-            // console.log('futPicCodes: ', futPicCodes);
-
-            // for (const code of futPicCodes){
-            //     getPic(code);
-            //     let picObj = {
-
-            //     }
-            // }
-            // picSrc;
-
-            // const getPic = code => {
-            //     picSrc = `http://openweathermap.org/img/wn/${code}@2x.png`
-            // }
-
-            // function getFutPics()
-
-            // futPicBox.forEach((element) => {
-            //     let futPic = document.createElement('img');
-            //     futPic.setAttribute('src', src);
-            //     futPic.setAttribute('style', 'height: 45px; width:45px');
-            //     element.setAttribute('style', 'display: flex; justify-content: center; align-items: center')
-            //     element.appendChild(futPic)
-            // })
-
-
-
-            // futPicBox.setAttribute('style', 'display: flex; justify-content: center; align-items: center')
  
-            // picSrc;
-            // const currPicCode = data.current.weather[0].icon;
-            // getPic(currPicCode);
-            // let currPic = document.createElement('img');
-            // currPic.setAttribute('src', picSrc);
-            // currPic.setAttribute('style', 'height: 45px; width:45px');
-
-            // currPicBox.appendChild(currPic);
-
             function set5Day(i){
                 let newTLI = document.createElement('li');
                 let newWLI = document.createElement('li');
@@ -467,6 +454,7 @@ $('#stored-cities').on('click', function(event){
     $(cityH2).text('');
     $('#cityInpt').val('');
     $('.fiveday').empty('li');
+    $('.fut-pic').empty('img');
     $('#current-pic').empty('img');
     let thisBtn = event.target;
     if (thisBtn.matches("button") === true){

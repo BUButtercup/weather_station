@@ -100,8 +100,6 @@ li {
     height: 100%;
 }
 
-
-
 #today {
     padding: 10px;
 }
@@ -128,6 +126,15 @@ li {
 #currentCity {
     list-style: none;
     line-height: 1.25em;
+}
+
+#uvBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px; 
+    width: 30px; 
+    color: white
 }
 
 #forecastbox {
