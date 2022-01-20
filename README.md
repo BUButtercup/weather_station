@@ -23,4 +23,8 @@ THEN I am again presented with current and future conditions for that city
 What I learned: a ton from this one! My code's, as usual, a little spastic as I try to decide if I like working in jQuery or vanilla best...I guess I better just jump on the jQuery train (or something like it) since it seems that that's the way most team go...
 Man though, this one was fun! After the head thimping and screams, that is. Extracting the needed data from the API calls and getting it to display dynamically on the page was very satisfying, as was figuring out how to get _exactly_ the place they were talking about to bring back the best weather data for them. Accounting for edge cases brought in some learning experience with modals, as well. All together, I'm satisfied with my final product!
 
-Screenshots:
+Screenshot GIFs:
+![weather-dt_gif](https://user-images.githubusercontent.com/95940864/150320753-47826067-f268-499f-a296-354359af94ec.gif)
+
+![weather-mb_gif](https://user-images.githubusercontent.com/95940864/150320855-150e3cb7-e926-4ea1-99ae-7d7ec9b1a0b8.gif)
+
